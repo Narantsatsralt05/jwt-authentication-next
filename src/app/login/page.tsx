@@ -44,9 +44,10 @@ export default function LoginForm() {
   });
 
   const onSubmit = async ({ email, password }: z.infer<typeof formSchema>) => {
+    const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? process.env.NEXT_PUBLIC_LOCAL_BACKEND_URL
     setLoading(true);
     const res = await axios.post(
-      "http://localhost:3000" + "/auth/sign-in",
+        BASE_URL + "/auth/sign-in",
       {
         email,
         password,

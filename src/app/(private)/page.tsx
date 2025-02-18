@@ -3,16 +3,15 @@
 import { useEffect } from "react";
 export default function Home() {
   const getUsers = async () => {
-    console.log(document.cookie);
+    const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? process.env.NEXT_PUBLIC_LOCAL_BACKEND_URL
 
     const res = await fetch(
-      "https://jwt-authentication-express-prisma-postgre.onrender.com/users",
+      BASE_URL + "/users",
       {
         credentials: "include",
       }
     );
     const result = await res.json();
-    console.log(result)
   };
 
   useEffect(() => {
