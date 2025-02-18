@@ -8,8 +8,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const refreshToken = cookieStore.get("refreshToken")?.value
-  if (!refreshToken || isTokenExpired(refreshToken))
-    return redirect('/login')
+  const accessToken = cookieStore.get("accessToken")?.value;
+
+  if (!accessToken || isTokenExpired(accessToken)) return redirect("/login");
   return <>{children}</>;
 }

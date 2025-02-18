@@ -44,16 +44,14 @@ export default function LoginForm() {
   });
 
   const onSubmit = async ({ email, password }: z.infer<typeof formSchema>) => {
-    const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? process.env.NEXT_PUBLIC_LOCAL_BACKEND_URL
+    const BASE_URL =
+      process.env.NEXT_PUBLIC_BACKEND_URL ??
+      process.env.NEXT_PUBLIC_LOCAL_BACKEND_URL;
     setLoading(true);
-    const res = await axios.post(
-        BASE_URL + "/auth/sign-in",
-      {
-        email,
-        password,
-      },
-      { withCredentials: true }
-    );
+    const res = await axios.post("/api/login", {
+      email,
+      password,
+    });
     setLoading(false);
 
     if (!res.data.success) {
@@ -62,7 +60,6 @@ export default function LoginForm() {
         description: res.data.message,
       });
     }
-
     toast({
       title: "Login",
       description: res.data.message,
