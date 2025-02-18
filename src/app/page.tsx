@@ -1,23 +1,23 @@
-import { cookies } from "next/headers";
-type User = {
-  id: number,
-  email: string,
-}
-export default async function Home() {
-  const res = await fetch("http://localhost:3000" + "/users", {
-    credentials: "include",
-    headers: { Cookie: (await cookies()).toString() },
-  });
-  const data = await res.json();
+"use client";
 
-  return (
-    <h1>
-      Zovhon nevtersen hun l orno
-      <div>
-        {data.map((user:User) => (
-          <p>{user.email}</p>
-        ))}
-      </div>
-    </h1>
-  );
+import { useEffect } from "react";
+export default function Home() {
+  const getUsers = async () => {
+    console.log(document.cookie);
+
+    const res = await fetch(
+      "https://jwt-authentication-express-prisma-postgre.onrender.com/users",
+      {
+        credentials: "include",
+      }
+    );
+    const result = await res.json();
+    console.log(result)
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  return <h1>Zovhon nevtersen hun l orno</h1>;
 }

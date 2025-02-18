@@ -16,7 +16,7 @@ export const isTokenExpired = (token: string) => {
   if (!decoded?.exp) return true;
   return Date.now() >= decoded.exp * 1000;
 };
- 
+
 export function middleware(request: NextRequest) {
   let cookie = request.cookies.get("refreshToken");
   if (!cookie?.value || isTokenExpired(cookie?.value!))
